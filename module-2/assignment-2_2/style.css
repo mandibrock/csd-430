@@ -1,0 +1,73 @@
+/*
+    Name: Amanda Brock
+    Date: August 23, 2026
+    Assignment: Module 2
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #a61b1b;
+    text-align: center;
+}
+
+h2 {
+    color: #a61b1b;
+    margin-top: 30px;
+}
+
+h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #a61b1b;
+    padding-bottom: 5px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th {
+    background-color: #a61b1b;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #cccccc;
+    padding: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e5e5e5;
+}
