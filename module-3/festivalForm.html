@@ -1,0 +1,580 @@
+<!--
+    Name: Amanda Brock
+    Assignment: Module 3
+    Purpose: Collects information about a user's experience at
+    featured U.S. EDM festivals held in September. Festival-specific
+    years, stages, and activities are displayed based on the user's
+    selections.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EDM Festival Experience Tracker</title>
+    <link rel="stylesheet" href="festival.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>EDM Festival Experience Tracker</h1>
+    <p class="intro">
+        Share your experience at one of the featured U.S. EDM festivals
+        held in September. Select a festival and the year you attended
+        to get started.
+    </p>
+
+    <form action="festivalResults.jsp" method="post">
+        <div class="form-section">
+            <h2>Festival Details</h2>
+
+            <!-- Favorite Festival -->
+            <div class="form-group">
+                <label for="festival">Festival:</label>
+                <select id="festival"
+                        name="festival"
+                        onchange="updateYears()"
+                        required>
+                    <option value="">Select a Festival</option>
+                    <option value="North Coast Music Festival">North Coast Music Festival</option>
+                    <option value="Dancefestopia">Dancefestopia</option>
+                    <option value="Lost Lands">Lost Lands</option>
+                    <option value="Nocturnal Wonderland">Nocturnal Wonderland </option>
+                    <option value="ARC Music Festival">ARC Music Festival</option>
+                </select>
+            </div>
+
+            <!-- Year Attended -->
+            <div class="form-group">
+                <label for="festivalYear">Year Attended:</label>
+                <select id="festivalYear"
+                        name="festivalYear"
+                        onchange="updateFestivalDetails()"
+                        disabled
+                        required>
+                    <option value="">Select a festival first</option>
+                </select>
+                <div class="year-note">
+                    Recent years only
+                </div>
+            </div>
+
+            <!-- Favorite Stage -->
+            <div class="form-group">
+                <label for="favoriteStage">Favorite Stage:</label>
+                <select id="favoriteStage"
+                        name="favoriteStage"
+                        disabled
+                        required>
+                    <option value="">Select a year first</option>
+                </select>
+            </div>
+
+            <!-- Favorite DJ -->
+            <div class="form-group">
+                <label for="favoriteDJ">Favorite DJ or Artist:</label>
+                <input type="text"
+                       id="favoriteDJ"
+                       name="favoriteDJ"
+                       disabled
+                       required>
+            </div>
+        </div>
+
+
+        <div class="form-section">
+            <h2>Experience Details</h2>
+
+            <!-- Activities -->
+            <div class="form-group">
+                <p class="field-title">Activities or Experiences You Enjoyed:</p>
+                <div id="activities">
+                    <p>Select a festival and year to view activities. </p>
+                </div>
+            </div>
+
+            <!-- Overall Rating -->
+            <div class="form-group">
+                <p class="field-title"> Overall Festival Rating:</p>
+                <input type="radio"
+                       id="rating1"
+                       name="rating"
+                       value="1 - Poor"
+                       disabled
+                       required>
+                <label for="rating1">1</label>
+
+                <input type="radio"
+                       id="rating2"
+                       name="rating"
+                       value="2 - Fair"
+                       disabled>
+                <label for="rating2">2</label>
+
+                <input type="radio"
+                       id="rating3"
+                       name="rating"
+                       value="3 - Good"
+                       disabled>
+                <label for="rating3">3</label>
+
+                <input type="radio"
+                       id="rating4"
+                       name="rating"
+                       value="4 - Great"
+                       disabled>
+                <label for="rating4">4</label>
+
+                <input type="radio"
+                       id="rating5"
+                       name="rating"
+                       value="5 - Amazing"
+                       disabled>
+                <label for="rating5">5</label>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Final Thoughts</h2>
+
+            <!-- Attend Again -->
+            <div class="form-group">
+                <p class="field-title">Would You Attend Again?</p>
+                <input type="radio"
+                       id="againYes"
+                       name="attendAgain"
+                       value="Yes"
+                       disabled
+                       required>
+                <label for="againYes">Yes</label>
+
+                <input type="radio"
+                       id="againMaybe"
+                       name="attendAgain"
+                       value="Maybe"
+                       disabled>
+                <label for="againMaybe">Maybe</label>
+
+                <input type="radio"
+                       id="againNo"
+                       name="attendAgain"
+                       value="No"
+                       disabled>
+                <label for="againNo">No</label>
+            </div>
+
+            <!-- Favorite Memory -->
+            <div class="form-group">
+                <label for="bestMemory">Favorite Festival Memory:</label>
+                <br>
+                <textarea id="bestMemory"
+                          name="bestMemory"
+                          rows="5"
+                          cols="45"
+                          disabled></textarea>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-group">
+                <input type="submit"
+                       id="submitButton"
+                       value="Create Festival Recap"
+                       disabled>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    // Stores festival information data
+    const festivalData = {
+        "North Coast Music Festival": {
+            years: [
+                "2024",
+                "2025",
+                "2026"
+            ],
+            stages: [
+                "The Stadium",
+                "The Vega",
+                "The Shipyard",
+                "Firepit",
+                "Chill Dome",
+                "Silent Disco"
+            ],
+            activities: [
+                "Art Installations",
+                "Chill Dome",
+                "NCMF Yacht Club",
+                "Rainbow Lounge",
+                "Roaming Performers",
+                "Food and Vendors"
+            ]
+        },
+
+        "Dancefestopia": {
+            years: [
+                "2024",
+                "2025",
+                "2026"
+            ],
+            stages: [
+                "Emerald Stage",
+                "Lollipop Stage",
+                "Pool Stage"
+            ],
+            activities: [
+                "Camping",
+                "Pool",
+                "Art Installations",
+                "Canoeing",
+                "Ropes Course",
+                "Zipline"
+            ]
+        },
+
+        "Lost Lands": {
+            years: [
+                "2024",
+                "2025",
+                "2026"
+            ],
+            stages: [
+                "Prehistoric Stage",
+                "Wompy Woods",
+                "The Crater",
+                "Grove Stage"
+            ],
+            activities: [
+                "Camping",
+                "Pre-Party",
+                "Dinosaur Displays",
+                "Village Marketplace",
+                "Art Installations",
+                "Food and Vendors"
+            ]
+        },
+
+        "Nocturnal Wonderland": {
+            years: [
+                "2025",
+                "2026"
+            ],
+            stages: [
+                "Mystic Wild",
+                "Dawn Mountain",
+                "Aurora Plains",
+                "Rave Cave"
+            ],
+            activities: [
+                "Camping",
+                "Art Installations",
+                "Costumed Performers",
+                "Silent Disco",
+                "Arts and Crafts",
+                "Yoga"
+            ]
+        },
+
+        "ARC Music Festival": {
+            years: [
+                "2024",
+                "2025",
+                "2026"
+            ],
+            stages: [
+                "The Grid",
+                "Elrow",
+                "Expansions",
+                "Area 909"
+            ],
+            activities: [
+                "Art Installations",
+                "Food Vendors",
+                "ARC After Dark",
+                "Photo Areas",
+                "Merchandise",
+                "Festival Lounges"
+            ]
+        }
+    };
+
+    // Updates year dropdown.
+    function updateYears() {
+        const festival =
+            document.getElementById("festival").value;
+        const yearSelect =
+            document.getElementById("festivalYear");
+        const stageSelect =
+            document.getElementById("favoriteStage");
+        const activitiesDiv =
+            document.getElementById("activities");
+
+        // Reset fields.
+        yearSelect.innerHTML = "";
+        stageSelect.innerHTML =
+            "<option value=''>Select a year first</option>";
+        stageSelect.disabled = true;
+        activitiesDiv.innerHTML =
+            "<p>Select a festival and year to view activities.</p>";
+
+        // Disable form if no festival is selected.
+        if (festival === "") {
+            yearSelect.disabled = true;
+            yearSelect.innerHTML =
+                "<option value=''>Select a festival first</option>";
+            disableForm();
+            return;
+        }
+
+        // Enable fields
+        yearSelect.disabled = false;
+        enableForm();
+
+        // Default year option
+        const defaultOption =
+            document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent =
+            "Select Year";
+        yearSelect.appendChild(defaultOption);
+
+        // Adds available years.
+        const years =
+            festivalData[festival].years;
+
+        for (let i = 0; i < years.length; i++) {
+            const option =
+                document.createElement("option");
+            option.value =
+                years[i];
+            option.textContent =
+                years[i];
+            yearSelect.appendChild(option);
+        }
+    }
+
+    // Updates stage and activity choices
+    function updateFestivalDetails() {
+        const festival =
+            document.getElementById("festival").value;
+        const year =
+            document.getElementById("festivalYear").value;
+        const stageSelect =
+            document.getElementById("favoriteStage");
+        const activitiesDiv =
+            document.getElementById("activities");
+
+        // Reset stage and activities.
+        stageSelect.innerHTML = "";
+        activitiesDiv.innerHTML = "";
+
+        // Wait until both festival and year are selected.
+        if (festival === "" || year === "") {
+            stageSelect.disabled = true;
+            stageSelect.innerHTML =
+                "<option value=''>Select a year first</option>";
+            activitiesDiv.innerHTML =
+                "<p>Select a festival and year to view activities.</p>";
+            return;
+        }
+
+        // Enable stage dropdown.
+        stageSelect.disabled = false;
+
+        const defaultStage =
+            document.createElement("option");
+        defaultStage.value = "";
+        defaultStage.textContent =
+            "Select Stage";
+        stageSelect.appendChild(defaultStage);
+
+        // Add festival stage choices.
+        const stages =
+            festivalData[festival].stages;
+
+        for (let i = 0; i < stages.length; i++) {
+            const option =
+                document.createElement("option");
+            option.value =
+                stages[i];
+            option.textContent =
+                stages[i];
+            stageSelect.appendChild(option);
+        }
+
+        // Add festival activity choices.
+        const activities =
+            festivalData[festival].activities;
+
+        for (let i = 0; i < activities.length; i++) {
+            const checkbox =
+                document.createElement("input");
+            checkbox.type =
+                "checkbox";
+            checkbox.name =
+                "activities";
+            checkbox.value =
+                activities[i];
+            checkbox.id =
+                "activity" + i;
+
+            const label =
+                document.createElement("label");
+            label.htmlFor =
+                "activity" + i;
+            label.textContent =
+                " " + activities[i];
+
+            activitiesDiv.appendChild(
+                checkbox);
+            activitiesDiv.appendChild(
+                label);
+            activitiesDiv.appendChild(
+                document.createElement("br"));
+        }
+
+        // Add the Other Activity option.
+        const otherCheckbox =
+            document.createElement("input");
+        otherCheckbox.type =
+            "checkbox";
+        otherCheckbox.id =
+            "otherActivityCheck";
+        otherCheckbox.onclick =
+            toggleOtherActivity;
+
+        const otherLabel =
+            document.createElement("label");
+        otherLabel.htmlFor =
+            "otherActivityCheck";
+        otherLabel.textContent =
+            " Other Activity or Experience ";
+
+        const otherField =
+            document.createElement("input");
+        otherField.type =
+            "text";
+        otherField.id =
+            "otherActivity";
+        otherField.name =
+            "otherActivity";
+        otherField.disabled =
+            true;
+
+        activitiesDiv.appendChild(
+            otherCheckbox);
+        activitiesDiv.appendChild(
+            otherLabel);
+        activitiesDiv.appendChild(
+            otherField);
+    }
+
+
+
+    // Enables the main form fields after a festival has been selected.
+    function enableForm() {
+        document.getElementById(
+            "favoriteDJ"
+        ).disabled = false;
+
+        document.getElementById(
+            "rating1"
+        ).disabled = false;
+        document.getElementById(
+            "rating2"
+        ).disabled = false;
+        document.getElementById(
+            "rating3"
+        ).disabled = false;
+        document.getElementById(
+            "rating4"
+        ).disabled = false;
+        document.getElementById(
+            "rating5"
+        ).disabled = false;
+
+        document.getElementById(
+            "againYes"
+        ).disabled = false;
+        document.getElementById(
+            "againMaybe"
+        ).disabled = false;
+        document.getElementById(
+            "againNo"
+        ).disabled = false;
+
+        document.getElementById(
+            "bestMemory"
+        ).disabled = false;
+
+        document.getElementById(
+            "submitButton"
+        ).disabled = false;
+    }
+
+    // Disables main form if user returns to Select a Festival.
+    function disableForm() {
+        const favoriteDJ =
+            document.getElementById("favoriteDJ");
+        favoriteDJ.disabled = true;
+        favoriteDJ.value = "";
+
+        document.getElementById(
+            "rating1"
+        ).disabled = true;
+        document.getElementById(
+            "rating2"
+        ).disabled = true;
+        document.getElementById(
+            "rating3"
+        ).disabled = true;
+        document.getElementById(
+            "rating4"
+        ).disabled = true;
+        document.getElementById(
+            "rating5"
+        ).disabled = true;
+
+        document.getElementById(
+            "againYes"
+        ).disabled = true;
+        document.getElementById(
+            "againMaybe"
+        ).disabled = true;
+        document.getElementById(
+            "againNo"
+        ).disabled = true;
+
+        const bestMemory =
+            document.getElementById("bestMemory");
+        bestMemory.disabled = true;
+        bestMemory.value = "";
+
+        document.getElementById(
+            "submitButton"
+        ).disabled = true;
+    }
+
+    // Enables Other Activity text field when its checkbox is selected.
+
+    function toggleOtherActivity() {
+        const otherCheck =
+            document.getElementById(
+                "otherActivityCheck");
+        const otherField =
+            document.getElementById(
+                "otherActivity");
+
+        if (otherCheck.checked) {
+            otherField.disabled = false;
+            otherField.focus();}
+        else {
+            otherField.disabled = true;
+            otherField.value = "";}
+    }
+
+</script>
+</body>
+</html>

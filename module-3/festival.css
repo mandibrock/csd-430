@@ -1,0 +1,295 @@
+/*
+    Name: Amanda Brock
+    Assignment: Module 3
+    Purpose: Makes the form and results page pretty.
+*/
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(
+            circle at top left,
+            #6a00ff 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #ff008c 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #08000f,
+            #120022,
+            #02010a
+        );
+    color: white;
+}
+
+.container {
+    width: 85%;
+    max-width: 550px;
+    margin: 35px auto;
+    padding: 35px;
+    background: rgba(10, 5, 25, 0.92);
+    border: 2px solid #8b5cf6;
+    border-radius: 18px;
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.5),
+        0 0 40px rgba(255, 0, 140, 0.2);
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    text-align: center;
+    color: white;
+    text-shadow:
+        0 0 8px #9b5cff,
+        0 0 16px #ff2aa8;
+}
+
+.intro {
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #e6def5;
+    line-height: 1.3;
+}
+
+.form-section {
+    margin: 28px 0;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(139, 92, 246, 0.45);
+    border-radius: 12px;
+}
+
+.form-section h2 {
+    margin: -24px -26px 24px -26px;
+    padding: 13px 18px;
+    font-size: 18px;
+    color: white;
+    background: linear-gradient(
+        90deg,
+        rgba(106, 0, 255, 0.45),
+        rgba(255, 0, 140, 0.18)
+    );
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 11px 11px 0 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group > label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 16px;
+}
+
+.field-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.form-group > select,
+.form-group > input[type="text"],
+.form-group > textarea {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #161022;
+    color: white;
+    border: 1px solid #8b5cf6;
+    border-radius: 8px;
+}
+
+select:focus,
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #ff2aa8;
+    box-shadow:
+        0 0 8px rgba(255, 42, 168, 0.8);
+}
+
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+    background-color: #272330;
+    color: #77717f;
+    border-color: #4b4655;
+    cursor: not-allowed;
+}
+
+.year-note {
+    margin-top: 4px;
+    margin-left: 4px;
+    font-size: 11px;
+    font-style: italic;
+    color: #9f93b3;
+}
+
+#activities {
+    max-width: 500px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 14px 16px;
+    background: rgba(139, 92, 246, 0.05);
+    border-left: 3px solid #ff2aa8;
+    border-radius: 6px;
+}
+
+#activities p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+#activities label {
+    display: inline;
+    line-height: 1.8;
+}
+
+#otherActivity {
+    width: 230px;
+    margin-left: 6px;
+    padding: 8px;
+    background-color: #161022;
+    color: white;
+    border: 1px solid #8b5cf6;
+    border-radius: 6px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #b05cff;
+    margin-right: 5px;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+    display: inline;
+    margin-right: 8px;
+    margin-bottom: 0;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+input[type="submit"] {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    color: #d8b4fe;
+    font-size: 14px;
+    font-weight: bold;
+    background:
+        rgba(139, 92, 246, 0.08);
+    border: 1px solid #8b5cf6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+input[type="submit"]:hover:not(:disabled) {
+    color: white;
+    border-color: #ff2aa8;
+    background:
+        rgba(255, 42, 168, 0.10);
+    box-shadow:
+        0 0 8px rgba(139, 92, 246, 0.6),
+        0 0 12px rgba(255, 42, 168, 0.3);
+}
+
+input[type="submit"]:disabled {
+    color: #77717f;
+    background:
+        rgba(255, 255, 255, 0.04);
+    border-color: #4b4655;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+table {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+    background:
+        rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    color: white;
+    background: linear-gradient(
+        90deg,
+        rgba(106, 0, 255, 0.45),
+        rgba(255, 0, 140, 0.18)
+    );
+}
+
+td {
+    padding: 12px;
+    color: #f3efff;
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.12);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background:
+        rgba(176, 92, 255, 0.08);
+}
+
+table td:first-child {
+    font-weight: bold;
+    color: #d8b4fe;
+}
+
+.recap-link {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 9px 16px;
+    color: #d8b4fe;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    background:
+        rgba(139, 92, 246, 0.08);
+    border: 1px solid #8b5cf6;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.recap-link:hover {
+    color: white;
+    border-color: #ff2aa8;
+    background:
+        rgba(255, 42, 168, 0.10);
+    box-shadow:
+        0 0 8px rgba(139, 92, 246, 0.6),
+        0 0 12px rgba(255, 42, 168, 0.3);
+}
+
