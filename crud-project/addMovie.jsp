@@ -1,0 +1,166 @@
+<%--
+    Name: Amanda Brock
+    Assignment: Module 7 
+    Purpose: Provides a form for adding a new movie record
+    to the CSD430 movie database.
+--%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Movie</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #d8ecf3 0%,
+                    #eaf5f1 55%,
+                    #dfead3 100%
+                );
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto 0;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 35px;
+            border-radius: 14px;
+
+            box-shadow:
+                0 8px 20px rgba(70, 90, 80, 0.18);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #3f5f5a;
+        }
+        .description {
+            text-align: center;
+            color: #5f6f68;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #465c56;
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 1px solid #aabbb5;
+            border-radius: 6px;
+            background-color: white;
+        }
+        button {
+            display: block;
+            margin: 25px auto 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #6f8f86;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5d7c74;
+        }
+        .home-link {
+            display: block;
+            font-size: 12px;
+            margin-top: 22px;
+            text-align: center;
+            color: #5d7c74;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Add a Movie</h1>
+        <p class="description">
+            Enter the movie information below to add a new record
+            to the Studio Ghibli movie database.
+        </p>
+
+        <form action="displayMovies.jsp" method="post">
+            <div class="form-group">
+                <label for="title">Movie Title:</label>
+                <input type="text"
+                       id="title"
+                       name="title"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select id="genre" name="genre" required>
+                    <option value="">Select a genre</option>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="releaseYear">Release Year:</label>
+                <input type="number"
+                       id="releaseYear"
+                       name="releaseYear"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Select a rating</option>
+                    <option value="G">G</option>
+                    <option value="PG">PG</option>
+                    <option value="PG-13">PG-13</option>
+                    <option value="R">R</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="runtime">Runtime (minutes):</label>
+                <input type="number"
+                       id="runtime"
+                       name="runtime"
+                       required>
+            </div>
+            <button type="submit">
+                Add Movie
+            </button>
+
+        </form>
+
+        <a class="home-link" href="index.jsp">
+            Back to Project Home
+        </a>
+
+    </div>
+
+</body>
+</html>

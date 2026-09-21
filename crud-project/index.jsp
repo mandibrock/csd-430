@@ -100,6 +100,17 @@
             </a>
         </div>
 
+        <div class="assignment">
+            <h3>CREATE - Add Movie Record</h3>
+            <p>
+                Enter movie information to add a new record
+                to the CSD430 movie database.
+            </p>
+            <a href="addMovie.jsp">
+                Add New Movie
+            </a>
+        </div>
+
         <!-- Additional module links will be added here. -->
 
     </div>

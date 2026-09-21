@@ -28,7 +28,7 @@ public class MovieBean implements Serializable {
     public MovieBean() {
     }
 
-    // Gets all movie IDs from database for menu
+    // PART 1 : Gets all movie IDs from database for menu
     public ArrayList<Integer> getMovieIds() {
         ArrayList<Integer> ids = new ArrayList<>();
         try {
@@ -51,7 +51,7 @@ public class MovieBean implements Serializable {
         return ids;
     }
 
-    // Gets one movie record using selected movie ID
+    // PART 1 : Gets one movie record using selected movie ID
     public boolean getMovieById(int id) {
         boolean found = false;
         try {
@@ -80,6 +80,90 @@ public class MovieBean implements Serializable {
             e.printStackTrace();
         }
         return found;
+    }
+
+    // PART 2 : Adds a new movie record to the database.
+    public boolean addMovie(String title, String genre, int releaseYear,
+                        String rating, int runtime) {
+
+        boolean added = false;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection =
+                    DriverManager.getConnection(url, username, password);
+
+            String sql =
+                    "INSERT INTO amandamoviesdata " +
+                    "(title, genre, release_year, rating, runtime) " +
+                    "VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+
+            statement.setString(1, title);
+            statement.setString(2, genre);
+            statement.setInt(3, releaseYear);
+            statement.setString(4, rating);
+            statement.setInt(5, runtime);
+
+            int rowsAdded = statement.executeUpdate();
+
+            if (rowsAdded > 0) {
+                added = true;
+            }
+
+            statement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return added;
+    }
+
+    // PART 2 : Retrieves all movie records from the database
+    public ArrayList<MovieBean> getAllMovies() {
+
+        ArrayList<MovieBean> movies = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection =
+                    DriverManager.getConnection(url, username, password);
+
+            String sql =
+                    "SELECT * FROM amandamoviesdata ORDER BY movie_id";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+
+                MovieBean movie = new MovieBean();
+
+                movie.movieId = resultSet.getInt("movie_id");
+                movie.title = resultSet.getString("title");
+                movie.genre = resultSet.getString("genre");
+                movie.releaseYear = resultSet.getInt("release_year");
+                movie.rating = resultSet.getString("rating");
+                movie.runtime = resultSet.getInt("runtime");
+
+                movies.add(movie);
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return movies;
     }
 
     public int getMovieId() {
