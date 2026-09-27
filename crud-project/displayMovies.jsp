@@ -1,8 +1,8 @@
 <%--
     Name: Amanda Brock
     Assignment: Module 7 
-    Purpose: Adds a new movie record to the database and displays
-    all movie records currently stored in the database.
+    Purpose: Displays all movie records currently stored in the database.
+    (Thank you for the feedback!)
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
@@ -12,27 +12,8 @@
 <jsp:useBean id="movieBean" class="beans.MovieBean" scope="page" />
 
 <%
-    String title = request.getParameter("title");
-    String genre = request.getParameter("genre");
-    String releaseYearValue = request.getParameter("releaseYear");
-    String rating = request.getParameter("rating");
-    String runtimeValue = request.getParameter("runtime");
+    boolean added = "true".equals(request.getParameter("added"));
 
-    boolean added = false;
-
-    if (title != null && genre != null &&
-        releaseYearValue != null && rating != null &&
-        runtimeValue != null) {
-        int releaseYear = Integer.parseInt(releaseYearValue);
-        int runtime = Integer.parseInt(runtimeValue);
-        added = movieBean.addMovie(
-            title,
-            genre,
-            releaseYear,
-            rating,
-            runtime
-        );
-    }
     ArrayList<MovieBean> movies = movieBean.getAllMovies();
 %>
 
@@ -138,16 +119,10 @@
             stored in the database.
         </p>
         <%
-            if (added) {
+    if (added) {
         %>
             <p class="success">
                 The new movie was added successfully.
-            </p>
-        <%
-            } else if (title != null) {
-        %>
-            <p class="error">
-                The movie could not be added.
             </p>
         <%
             }

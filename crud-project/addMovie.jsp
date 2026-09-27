@@ -6,7 +6,56 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="beans.MovieBean" %>
 
+<jsp:useBean id="movieBean" class="beans.MovieBean" scope="page" />
+
+<%
+    String errorMessage = "";
+
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+
+        String title = request.getParameter("title");
+        String genre = request.getParameter("genre");
+        String releaseYearValue = request.getParameter("releaseYear");
+        String rating = request.getParameter("rating");
+        String runtimeValue = request.getParameter("runtime");
+
+        if (title == null || title.trim().isEmpty() ||
+            genre == null || genre.trim().isEmpty() ||
+            releaseYearValue == null || releaseYearValue.trim().isEmpty() ||
+            rating == null || rating.trim().isEmpty() ||
+            runtimeValue == null || runtimeValue.trim().isEmpty()) {
+
+            errorMessage = "Please complete all movie fields.";
+
+        } else {
+            try {
+                int releaseYear = Integer.parseInt(releaseYearValue);
+                int runtime = Integer.parseInt(runtimeValue);
+
+                boolean added = movieBean.addMovie(
+                    title.trim(),
+                    genre,
+                    releaseYear,
+                    rating,
+                    runtime
+                );
+
+                if (added) {
+                    response.sendRedirect("displayMovies.jsp?added=true");
+                    return;
+                } else {
+                    errorMessage = "The movie could not be added.";
+                }
+
+            } catch (NumberFormatException e) {
+                errorMessage =
+                    "Release year and runtime must be valid numbers.";
+            }
+        }
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,12 +149,19 @@
 
     <div class="container">
         <h1>Add a Movie</h1>
+        <%
+            if (!errorMessage.isEmpty()) {
+        %>
+            <p class="error"><%= errorMessage %></p>
+        <%
+            }
+        %>
         <p class="description">
             Enter the movie information below to add a new record
             to the Studio Ghibli movie database.
         </p>
 
-        <form action="displayMovies.jsp" method="post">
+        <form action="addMovie.jsp" method="post">
             <div class="form-group">
                 <label for="title">Movie Title:</label>
                 <input type="text"

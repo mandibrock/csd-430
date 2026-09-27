@@ -1,6 +1,6 @@
 /*
     Name: Amanda Brock
-    Assignment: Modules 5 & 6 
+    Assignment: Modules 5, 6, 7, and 8
     Purpose: Connects to the CSD430 database and retrieves movie data
     from the amandamoviesdata table.
 */
@@ -85,107 +85,113 @@ public class MovieBean implements Serializable {
     // PART 2 : Adds a new movie record to the database.
     public boolean addMovie(String title, String genre, int releaseYear,
                         String rating, int runtime) {
-
         boolean added = false;
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection connection =
                     DriverManager.getConnection(url, username, password);
-
             String sql =
                     "INSERT INTO amandamoviesdata " +
                     "(title, genre, release_year, rating, runtime) " +
                     "VALUES (?, ?, ?, ?, ?)";
-
             PreparedStatement statement =
                     connection.prepareStatement(sql);
-
             statement.setString(1, title);
             statement.setString(2, genre);
             statement.setInt(3, releaseYear);
             statement.setString(4, rating);
             statement.setInt(5, runtime);
-
             int rowsAdded = statement.executeUpdate();
-
             if (rowsAdded > 0) {
                 added = true;
             }
-
             statement.close();
             connection.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return added;
     }
 
     // PART 2 : Retrieves all movie records from the database
     public ArrayList<MovieBean> getAllMovies() {
-
         ArrayList<MovieBean> movies = new ArrayList<>();
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection connection =
                     DriverManager.getConnection(url, username, password);
-
             String sql =
                     "SELECT * FROM amandamoviesdata ORDER BY movie_id";
-
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-
             while (resultSet.next()) {
-
                 MovieBean movie = new MovieBean();
-
                 movie.movieId = resultSet.getInt("movie_id");
                 movie.title = resultSet.getString("title");
                 movie.genre = resultSet.getString("genre");
                 movie.releaseYear = resultSet.getInt("release_year");
                 movie.rating = resultSet.getString("rating");
                 movie.runtime = resultSet.getInt("runtime");
-
                 movies.add(movie);
             }
-
             resultSet.close();
             statement.close();
             connection.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return movies;
     }
+
+// PART 3 : Updates an existing movie record in the database
+public boolean updateMovie(int movieId, String title, String genre,
+                           int releaseYear, String rating, int runtime) {
+    boolean updated = false;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection =
+                DriverManager.getConnection(url, username, password);
+        String sql =
+                "UPDATE amandamoviesdata " +
+                "SET title = ?, genre = ?, release_year = ?, " +
+                "rating = ?, runtime = ? " +
+                "WHERE movie_id = ?";
+        PreparedStatement statement =
+                connection.prepareStatement(sql);
+        statement.setString(1, title);
+        statement.setString(2, genre);
+        statement.setInt(3, releaseYear);
+        statement.setString(4, rating);
+        statement.setInt(5, runtime);
+        statement.setInt(6, movieId);
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            updated = true;
+        }
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return updated;
+}
+
 
     public int getMovieId() {
         return movieId;
     }
-
     public String getTitle() {
         return title;
     }
-
     public String getGenre() {
         return genre;
     }
-
     public int getReleaseYear() {
         return releaseYear;
     }
-
     public String getRating() {
         return rating;
     }
-
     public int getRuntime() {
         return runtime;
     }

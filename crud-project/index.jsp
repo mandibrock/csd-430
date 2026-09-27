@@ -87,7 +87,6 @@
         <p class="subtitle">
             Studio Ghibli Movie Database
         </p>
-
         <h2>Project Assignments</h2>
         <div class="assignment">
             <h3>READ - View Movie Record</h3>
@@ -99,7 +98,6 @@
                 View Movie Database
             </a>
         </div>
-
         <div class="assignment">
             <h3>CREATE - Add Movie Record</h3>
             <p>
@@ -110,8 +108,18 @@
                 Add New Movie
             </a>
         </div>
+        <div class="assignment">
+            <h3>UPDATE - Edit Movie Record</h3>
+            <p>
+                Select a movie ID and update the corresponding
+                record in the CSD430 movie database.
+            </p>
+            <a href="selectUpdateMovie.jsp">
+                Update Movie
+            </a>
+        </div>
 
-        <!-- Additional module links will be added here. -->
+<!-- Additional module links will be added here. -->
 
     </div>
 

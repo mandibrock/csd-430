@@ -24,11 +24,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Details</title>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Movie Details</title>
 
     <style>
         body {
@@ -145,11 +140,9 @@
             } else {
         %>
             <p>No movie record was found.</p>
-
         <%
             }
         %>
-
         <a class="back-link" href="selectMovie.jsp">
             Select Another Movie
         </a>
