@@ -143,40 +143,65 @@ public class MovieBean implements Serializable {
         return movies;
     }
 
-// PART 3 : Updates an existing movie record in the database
-public boolean updateMovie(int movieId, String title, String genre,
-                           int releaseYear, String rating, int runtime) {
-    boolean updated = false;
-    try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection =
-                DriverManager.getConnection(url, username, password);
-        String sql =
-                "UPDATE amandamoviesdata " +
-                "SET title = ?, genre = ?, release_year = ?, " +
-                "rating = ?, runtime = ? " +
-                "WHERE movie_id = ?";
-        PreparedStatement statement =
-                connection.prepareStatement(sql);
-        statement.setString(1, title);
-        statement.setString(2, genre);
-        statement.setInt(3, releaseYear);
-        statement.setString(4, rating);
-        statement.setInt(5, runtime);
-        statement.setInt(6, movieId);
-        int rowsUpdated = statement.executeUpdate();
-        if (rowsUpdated > 0) {
-            updated = true;
+    // PART 3 : Updates an existing movie record in the database
+    public boolean updateMovie(int movieId, String title, String genre,
+                            int releaseYear, String rating, int runtime) {
+        boolean updated = false;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection =
+                    DriverManager.getConnection(url, username, password);
+            String sql =
+                    "UPDATE amandamoviesdata " +
+                    "SET title = ?, genre = ?, release_year = ?, " +
+                    "rating = ?, runtime = ? " +
+                    "WHERE movie_id = ?";
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+            statement.setString(1, title);
+            statement.setString(2, genre);
+            statement.setInt(3, releaseYear);
+            statement.setString(4, rating);
+            statement.setInt(5, runtime);
+            statement.setInt(6, movieId);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                updated = true;
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        statement.close();
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+        return updated;
     }
-    return updated;
-}
+
+    // PART 4 : Deletes a movie record from the database
+    public boolean deleteMovie(int movieId) {
+        boolean deleted = false;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection =
+                    DriverManager.getConnection(url, username, password);
+            String sql =
+                    "DELETE FROM amandamoviesdata WHERE movie_id = ?";
+            PreparedStatement statement =
+                    connection.prepareStatement(sql);
+            statement.setInt(1, movieId);
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                deleted = true;
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deleted;
+    }
 
 
+    
     public int getMovieId() {
         return movieId;
     }

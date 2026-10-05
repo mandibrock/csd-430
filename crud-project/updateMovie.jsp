@@ -84,90 +84,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Movie</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(
-                to bottom right,
-                #d9edf2,
-                #eef5e9
-            );
-            margin: 0;
-            min-height: 100vh;
-        }
-        .container {
-            width: 550px;
-            margin: 60px auto;
-            background-color: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-        }
-        h1 {
-            text-align: center;
-            color: #315c5b;
-        }
-        .field {
-            margin-bottom: 18px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #315c5b;
-        }
-        input,
-        select {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            border: 1px solid #b7c9c6;
-            border-radius: 5px;
-            font-size: 15px;
-        }
-        .movie-id {
-            background-color: #eeeeee;
-            color: #555;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .button-area {
-            text-align: center;
-            margin-top: 25px;
-        }
-        input[type="submit"] {
-            width: auto;
-            background-color: #6f9189;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #587a73;
-        }
-        .error {
-            background-color: #f8dddd;
-            color: #8b3333;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #557b78;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="update-movie-page">
 
 <div class="container">
 
@@ -240,8 +159,8 @@
     <%
         }
     %>
-
-    <a class="back-link"
+    <br>
+    <a class="home-link"
        href="selectUpdateMovie.jsp">
         Back to Movie Selection
     </a>
